@@ -27,8 +27,6 @@ def set_rotors(**kwargs):
     if('d' in kwargs): pwmArray[1].set_duty_cycle(convert(kwargs['d']))
 
 def test_rotors():
-    navio.util.check_apm()
-
     PWM_OUTPUT = 0
     # These are just some good values to know when seting the motor power
 
