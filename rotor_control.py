@@ -5,13 +5,20 @@ import time
 import navio.pwm
 import navio.util
 
-def calibrate_and_test():
+# Default min and max
+SERVO_MIN = 1.18 #1.250 #ms
+SERVO_MAX = 1.750 #ms
+
+
+def calibrate():
+    # TODO: Find max and min and save them
+
+def test_rotors():
     navio.util.check_apm()
 
     PWM_OUTPUT = 0
     # These are just some good values to know when seting the motor power
-    SERVO_MIN = 1.18 #1.250 #ms
-    SERVO_MAX = 1.750 #ms
+
 
     # Now every time we want to use a motor, we have to enable it first
     # Let's enable all 4 (they're numbered 0-3)
