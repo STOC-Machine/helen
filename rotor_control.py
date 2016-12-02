@@ -26,6 +26,20 @@ def set_rotors(**kwargs):
     if('c' in kwargs): pwmArray[3].set_duty_cycle(convert(kwargs['c']))
     if('d' in kwargs): pwmArray[1].set_duty_cycle(convert(kwargs['d']))
 
+def off_rotors():
+    # Now every time we want to use a motor, we have to enable it first
+    # Let's enable all 4 (they're numbered 0-3)
+
+    for num in range(0,3+1): # This loops over 0,1,2,3
+    	pwm = navio.pwm.PWM(num)
+    	pwm.set_period(50)
+    	pwmArray.append(pwm)
+        
+    # So even if you terminate the script, they will keep spinning
+    # We have to send a stop signal to every motor before we leave
+    for pwm in pwmArray:
+        pwm.set_duty_cycle(0)
+
 def test_rotors():
     PWM_OUTPUT = 0
     # These are just some good values to know when seting the motor power

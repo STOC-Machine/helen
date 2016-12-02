@@ -12,10 +12,24 @@ def init():
         print("=========== IMU FAILED TO LOAD ===========")
     imu.initialize()
 
-def get_data():
+def ensure_imu_loaded():
     if(imu == 0):
-        print("CANNOT USE IMU IF NOT INITIALIZED. Make sure to run sensors.init() first")
-        return
+        raise ValueError("CANNOT USE IMU IF NOT INITIALIZED. Make sure to run sensors.init() first")
+
+def get_data3():
+    ensure_imu_loaded()
+    imu.read_acc()
+    return imu.accelerometer_data
+#    print "Accelerometer:     ", imu.accelerometer_data[2] #Pitch=0, Roll=1, Yaw=2
+
+def get_data2():
+    ensure_imu_loaded()
+    imu.read_gyro()
+    return imu.gyroscope_data
+#    print "Gyroscope:     ", imu.gyroscope_data[2] #Pitch=0, Roll=1, Yaw=2
+
+def get_data():
+    ensure_imu_loaded()
     m9a, m9g, m9m = imu.getMotion9()
 
     print "Acc:", "{:+7.3f}".format(m9a[0]), "{:+7.3f}".format(m9a[1]), "{:+7.3f}".format(m9a[2]),
