@@ -16,6 +16,12 @@ def ensure_imu_loaded():
     if(imu == 0):
         raise ValueError("CANNOT USE IMU IF NOT INITIALIZED. Make sure to run sensors.init() first")
 
+def get_data4():
+    ensure_imu_loaded()
+    m9a, m9g, m9m = imu.getMotion9()
+    return m9g
+#    print "Gyroscope:     ", imu.gyroscope_data[2] #Pitch=0, Roll=1, Yaw=2
+
 def get_data3():
     ensure_imu_loaded()
     imu.read_acc()
